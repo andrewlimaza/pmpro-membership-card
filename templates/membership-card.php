@@ -7,20 +7,23 @@
  * @var string $qr_data
  */
 	global $wpdb, $pmpro_membership_card_user, $pmpro_currency_symbol, $post;
-	if( (in_array('small',$print_sizes)) || (in_array('Small',$print_sizes)) || (in_array('all',$print_sizes)) || empty($print_sizes) )
+	if ( (in_array('small',$print_sizes)) || (in_array('Small',$print_sizes)) || (in_array('all',$print_sizes)) || empty($print_sizes) ) {
 		$print_small = true;
-	else
+	} else {
 		$print_small = false;
+	}
 		
-	if( (in_array('medium',$print_sizes)) || (in_array('Medium',$print_sizes)) || (in_array('all',$print_sizes)) || empty($print_sizes) )
+	if ( (in_array('medium',$print_sizes)) || (in_array('Medium',$print_sizes)) || (in_array('all',$print_sizes)) || empty($print_sizes) ) {
 		$print_medium = true;
-	else
+	} else {
 		$print_medium = false;
+	}
 		
-	if( (in_array('large',$print_sizes)) || (in_array('Large',$print_sizes)) || (in_array('all',$print_sizes)) || empty($print_sizes) )
+	if ( (in_array('large',$print_sizes)) || (in_array('Large',$print_sizes)) || (in_array('all',$print_sizes)) || empty($print_sizes) ) {
 		$print_large = true;
-	else
+	} else {
 		$print_large = false;
+	}
 
 
 ?>
@@ -196,8 +199,8 @@
 		<?php } ?>
 	}
 </style>
-<a class="pmpro_a-print" href="javascript:window.print()">Print</a>
-<div class="pmpro_membership_card">
+<a class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_a-print' ) ); ?>" href="javascript:window.print()"><?php esc_html_e( 'Print', 'pmpro-membership-card' ); ?></a>
+<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card' ) ); ?>">
 	<?php 
 		$featured_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); 
 		if(function_exists("pmpro_getMemberStartDate") && isset( $pmpro_membership_card_user->ID ) )
@@ -205,9 +208,9 @@
 		else
 			$since = isset( $pmpro_membership_card_user->user_registered ) ? $pmpro_membership_card_user->user_registered : '';
 	?>
-	<div class="pmpro_membership_card-print pmpro_membership_card-print-sm"<?php if(empty($print_small)) { ?> style="display: none;"<?php } ?>>
-		<div class="pmpro_membership_card-inner <?php do_action( 'pmpro_membership_card-extra_classes', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>">
-			<div class="pmpro_membership_card-data">
+	<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-print pmpro_membership_card-print-sm', 'pmpro_membership_card-print-sm' ) ); ?>"<?php if(empty($print_small)) { ?> style="display: none;"<?php } ?>>
+		<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-inner' ) ) . ' ' . do_action( 'pmpro_membership_card-extra_classes', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>">
+			<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-data' ) ); ?>">
 				<h1>
 					<?php 
 						echo pmpro_membership_card_return_user_name( $pmpro_membership_card_user );
@@ -217,7 +220,7 @@
 					if(!empty($featured_image))
 					{
 					?>
-					<img id="pmpro_membership_card_image" class="pmpro_membership_card_image" src="<?php echo esc_attr($featured_image);?>" border="0" />
+					<img id="pmpro_membership_card_image" class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card_image' ) ); ?>" src="<?php echo esc_attr($featured_image);?>" border="0" />
 					<?php
 					}
 				?>	
@@ -231,28 +234,28 @@
 				?>
 				<?php if(function_exists("pmpro_hasMembershipLevel")) { ?>
 
-				<p><strong><?php _e("Level", 'pmpro-membership-card');?>:</strong>
+				<p><strong><?php esc_html_e("Level", 'pmpro-membership-card');?>:</strong>
 				<?php
 					pmpro_membership_card_output_levels_for_user( $pmpro_membership_card_user );
 				?>
 				</p>		
-				<p><strong><?php _e("Membership Expires", 'pmpro-membership-card');?>:</strong> 
+				<p><strong><?php esc_html_e("Membership Expires", 'pmpro-membership-card');?>:</strong> 
 					<?php 
 						echo pmpro_membership_card_return_end_date( $pmpro_membership_card_user );
 					?>
 				</p>
 				<?php } ?>
 				<?php if( has_action( 'pmpro_membership_card_after_card' ) ){ ?>
-					<div class="pmpro_membership_card-after">
+					<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-after' ) ); ?>">
 						<?php do_action( 'pmpro_membership_card_after_card', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>
 					</div>
 				<?php } ?>
 			</div>
-		</div><div class="pmpro_clear"></div>
+		</div><div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_clear' ) ); ?>"></div>
 	</div> <!-- end pmpro_membership_card-print-sm -->
-	<div class="pmpro_membership_card-print pmpro_membership_card-print-md">
-		<div class="pmpro_membership_card-inner <?php do_action( 'pmpro_membership_card-extra_classes', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>">
-			<div class="pmpro_membership_card-data">
+	<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-print pmpro_membership_card-print-md', 'pmpro_membership_card-print-md' ) ); ?>">
+		<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-inner' ) ) . do_action( 'pmpro_membership_card-extra_classes', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>">
+			<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-data' ) ); ?>">
 				<h1>
 					<?php 
 						echo pmpro_membership_card_return_user_name( $pmpro_membership_card_user );
@@ -262,7 +265,7 @@
 					if(!empty($featured_image))
 					{
 					?>
-					<img id="pmpro_membership_card_image" class="pmpro_membership_card_image" src="<?php echo esc_attr($featured_image);?>" border="0" />
+					<img id="pmpro_membership_card_image" class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card_image' ) ); ?>" src="<?php echo esc_attr($featured_image);?>" border="0" />
 					<?php
 					}
 				?>	
@@ -277,28 +280,28 @@
 
 				<?php if(function_exists("pmpro_hasMembershipLevel")) { ?>
 
-				<p><strong><?php _e("Level", 'pmpro-membership-card');?>:</strong>
+				<p><strong><?php es_html_e("Level", 'pmpro-membership-card');?>:</strong>
 				<?php
 					pmpro_membership_card_output_levels_for_user( $pmpro_membership_card_user );
 				?>
 				</p>
-				<p><strong><?php _e("Membership Expires", 'pmpro-membership-card');?>:</strong> 
+				<p><strong><?php esc_html_e("Membership Expires", 'pmpro-membership-card');?>:</strong> 
 					<?php 
 						echo pmpro_membership_card_return_end_date( $pmpro_membership_card_user );
 					?>
 				</p>
 				<?php } ?>
 				<?php if( has_action( 'pmpro_membership_card_after_card' ) ){ ?>
-					<div class="pmpro_membership_card-after">
+					<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-after' ) ); ?>">
 						<?php do_action( 'pmpro_membership_card_after_card', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>
 					</div>
 				<?php } ?>
 			</div>
-		</div><div class="pmpro_clear"></div>
+		</div><div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_clear' ) ); ?>"></div>
 	</div> <!-- end pmpro_membership_card-print-md -->
-	<div class="pmpro_membership_card-print pmpro_membership_card-print-lg"<?php if(empty($print_large)) { ?> style="display: none;"<?php } ?>>
-		<div class="pmpro_membership_card-inner <?php do_action( 'pmpro_membership_card-extra_classes', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>">
-			<div class="pmpro_membership_card-data">
+	<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-print pmpro_membership_card-print-lg', 'pmpro_membership_card-print-lg' ) ); ?>" <?php if(empty($print_large)) { ?> style="display: none;"<?php } ?>>
+		<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-inner' ) ) . ' ' . do_action( 'pmpro_membership_card-extra_classes', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>">
+			<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-data' ) ); ?>">
 				<h1>
 					<?php 
 						echo pmpro_membership_card_return_user_name( $pmpro_membership_card_user );
@@ -308,7 +311,7 @@
 					if(!empty($featured_image))
 					{
 					?>
-					<img id="pmpro_membership_card_image" class="pmpro_membership_card_image" src="<?php echo esc_attr($featured_image);?>" border="0" />
+					<img id="pmpro_membership_card_image" class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card_image' ) ); ?>" src="<?php echo esc_attr($featured_image);?>" border="0" />
 					<?php
 					}
 				?>		
@@ -323,31 +326,31 @@
 					
 				<?php if(function_exists("pmpro_hasMembershipLevel")) { ?>
 
-				<p><strong><?php _e("Level", 'pmpro-membership-card');?>:</strong>
+				<p><strong><?php esc_html_e("Level", 'pmpro-membership-card');?>:</strong>
 				<?php
 					pmpro_membership_card_output_levels_for_user( $pmpro_membership_card_user );
 				?>
 				</p>		
-				<p><strong><?php _e("Membership Expires", 'pmpro-membership-card');?>:</strong> 
+				<p><strong><?php esc_html_e("Membership Expires", 'pmpro-membership-card');?>:</strong> 
 					<?php 
 						echo pmpro_membership_card_return_end_date( $pmpro_membership_card_user );
 					?>
 				</p>				
 				<?php } ?>
 				<?php if( has_action( 'pmpro_membership_card_after_card' ) ){ ?>
-					<div class="pmpro_membership_card-after">
+					<div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_membership_card-after' ) ); ?>">
 						<?php do_action( 'pmpro_membership_card_after_card', $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ); ?>
 					</div>
 				<?php } ?>
 			</div>
-		</div><div class="pmpro_clear"></div>
+		</div><div class="<?php echo esc_attr( pmpro_get_element_class( 'pmpro_clear' ) ); ?>"></div>
 	</div> <!-- end pmpro_membership_card-print-lg -->	
 	<nav id="nav-below" class="navigation" role="navigation">
 		<div class="nav-previous alignleft">
 			<?php if(function_exists("pmpro_hasMembershipLevel") && isset( $pmpro_membership_card_user->ID ) && pmpro_hasMembershipLevel(NULL, $pmpro_membership_card_user->ID)) { ?>
-				<a href="<?php echo pmpro_url("account")?>"><?php _e('&larr; Return to Your Account', 'pmpro-membership-card');?></a>
+				<a href="<?php echo pmpro_url("account")?>"><?php esc_html_e('Return to Your Account', 'pmpro-membership-card');?></a>
 			<?php } else { ?>
-				<a href="<?php echo home_url()?>">&larr;<?php _e( 'Return to Home', 'pmpro-membership-card' );?></a>
+				<a href="<?php echo home_url()?>"><?php esc_html_e( 'Return to Home', 'pmpro-membership-card' );?></a>
 			<?php } ?>
 		</div>
 	</nav>

@@ -328,7 +328,7 @@ function pmpro_membership_card_return_end_date( $pmpro_membership_card_user ){
 
 	// Make sure the user exists.
 	if ( empty( $pmpro_membership_card_user ) ) {
-		return __( 'Never', 'pmpro-membership-card' );
+		return esc_html__( 'Never', 'pmpro-membership-card' );
 	}
 
 	$furthest_enddate = null;
@@ -341,7 +341,7 @@ function pmpro_membership_card_return_end_date( $pmpro_membership_card_user ){
 	if( ! empty( $furthest_enddate ) )
 		return date_i18n( get_option('date_format'), $furthest_enddate );
 	else
-		return __('Never', 'pmpro-membership-card');
+		return esc_html__('Never', 'pmpro-membership-card');
 
 }
 
@@ -405,7 +405,7 @@ function pmpro_membership_card_get_levels_for_user( $pmpro_membership_card_user 
 	}
 
 	if ( empty( $levels ) ) {
-		return _e( 'None', 'pmpro-membership-card' );
+		return esc_html__( 'None', 'pmpro-membership-card' );
 	} else {
 		return $levels;
 	}
@@ -464,7 +464,7 @@ add_action( 'pmpro_membership_card_after_card', 'pmpro_membership_card_qr_code',
  */
 function pmpro_membership_card_qr_code_class( $pmpro_membership_card_user, $print_sizes, $qr_code, $qr_data ){
 	if( intval( $qr_code ) || $qr_code == 'true' ){
-		echo 'pmpro-qr-code-active';
+		echo esc_attr( pmpro_get_element_class( 'pmpro-qr-code-active' ) );
 	}
 }
 add_action( 'pmpro_membership_card-extra_classes', 'pmpro_membership_card_qr_code_class', 10, 4 );
